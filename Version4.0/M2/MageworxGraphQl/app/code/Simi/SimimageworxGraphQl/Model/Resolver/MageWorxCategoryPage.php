@@ -5,7 +5,7 @@
  */
 declare(strict_types=1);
 
-namespace Simi\SimimageworxGraphQl\Model\Resolver\Product;
+namespace Simi\SimimageworxGraphQl\Model\Resolver;
 
 // use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
@@ -28,7 +28,6 @@ class MageWorxCategoryPage implements ResolverInterface
         array $value = null,
         array $args = null
     ): array {
-
         $url = '';
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         $canonicalCategory = $objectManager->get('MageWorx\SeoBase\Model\Canonical\Category');

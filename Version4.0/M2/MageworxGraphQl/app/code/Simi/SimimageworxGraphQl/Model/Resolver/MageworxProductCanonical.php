@@ -5,7 +5,7 @@
  */
 declare(strict_types=1);
 
-namespace Simi\SimimageworxGraphQl\Model\Resolver\Product;
+namespace Simi\SimimageworxGraphQl\Model\Resolver;
 
 // use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
