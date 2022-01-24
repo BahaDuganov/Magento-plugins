@@ -99,9 +99,9 @@ class MageWorxConfig implements ResolverInterface
                 $additionalData['mageworx_seo']['markup']['product'] = [
                     'is_specific_product' => $mageworxHelperProduct->isRsEnabledForSpecificProduct(),
                     'rs_enabled' => $mageworxHelperProduct->isRsEnabled(),
-                    // 'og_enabled' => $mageworxHelperProduct->isOgEnabled(),
+                    'og_enabled' => $mageworxHelperProduct->isOgEnabled(),
                     'tw_enabled' => $mageworxHelperProduct->isTwEnabled(),
-                    // 'tw_username' => $mageworxHelperProduct->getTwUsername(),
+                    'tw_username' => $mageworxHelperProduct->getTwUsername(),
                     'best_rating' => $mageworxHelperProduct->getBestRating(),
                     'add_reviews' => $mageworxHelperProduct->isReviewsEnabled(),
                     'use_multiple_offer' => $mageworxHelperProduct->useMultipleOffer(),
@@ -137,28 +137,28 @@ class MageWorxConfig implements ResolverInterface
             if ($mageworxHelperCategory) {
                 $additionalData['mageworx_seo']['markup']['category'] = [
                     'rs_enabled' => $mageworxHelperCategory->isRsEnabled(),
-                    // 'og_enabled' => $mageworxHelperCategory->isOgEnabled(),
-                    // 'tw_enabled' => $mageworxHelperCategory->isTwEnabled(),
-                    // 'tw_username' => $mageworxHelperCategory->getTwUsername(),
+                    'og_enabled' => $mageworxHelperCategory->isOgEnabled(),
+                    'tw_enabled' => $mageworxHelperCategory->isTwEnabled(),
+                    'tw_username' => $mageworxHelperCategory->getTwUsername(),
                 ];
             }
             // SMS Page
             $mageworxHelperPage = $this->simiObjectManager->get('MageWorx\SeoMarkup\Helper\Page');
             if ($mageworxHelperPage) {
-                // $additionalData['mageworx_seo']['markup']['page'] = [
-                //     'og_enabled' => $mageworxHelperPage->isOgEnabled(),
-                //     'tw_enabled' => $mageworxHelperPage->isTwEnabled(),
-                //     'tw_username' => $mageworxHelperPage->getTwUsername(),
-                // ];
+                $additionalData['mageworx_seo']['markup']['page'] = [
+                    'og_enabled' => $mageworxHelperPage->isOgEnabled(),
+                    'tw_enabled' => $mageworxHelperPage->isTwEnabled(),
+                    'tw_username' => $mageworxHelperPage->getTwUsername(),
+                ];
             }
             // Website
             $mageworxHelperWebsite = $this->simiObjectManager->get('MageWorx\SeoMarkup\Helper\Website');
             if ($mageworxHelperWebsite) {
                 $additionalData['mageworx_seo']['markup']['website'] = [
                     'rs_enabled' => $mageworxHelperWebsite->isRsEnabled(),
-                    // 'og_enabled' => $mageworxHelperWebsite->isOgEnabled(),
-                    // 'tw_enabled' => $mageworxHelperWebsite->isTwEnabled(),
-                    // 'tw_username' => $mageworxHelperWebsite->getTwUsername(),
+                    'og_enabled' => $mageworxHelperWebsite->isOgEnabled(),
+                    'tw_enabled' => $mageworxHelperWebsite->isTwEnabled(),
+                    'tw_username' => $mageworxHelperWebsite->getTwUsername(),
                 ];
             }
             // Seller

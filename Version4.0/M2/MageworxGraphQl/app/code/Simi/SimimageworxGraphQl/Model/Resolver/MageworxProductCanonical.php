@@ -1,8 +1,10 @@
 <?php
+
 /**
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 declare(strict_types=1);
 
 namespace Simi\SimimageworxGraphQl\Model\Resolver;
@@ -28,13 +30,14 @@ class MageworxProductCanonical implements ResolverInterface
         array $value = null,
         array $args = null
     ): array {
-
+        if (!isset($value['model']))
+            return [];
+        $product = $value['model'];
         $url = '';
+        $extraField = 'no';
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         $canonicalProduct = $objectManager->get('MageWorx\SeoBase\Model\Canonical\Product');
-        $registry = $objectManager->get('\Magento\Framework\Registry');
-        if ($registry->registry('product')) {
-            $product = $registry->registry('product');
+        if ($product) {
             if ($canonicalProduct) {
                 $canonicalProduct->setEntity($product);
                 $url = $canonicalProduct->getCanonicalUrl();
@@ -47,10 +50,22 @@ class MageworxProductCanonical implements ResolverInterface
                 //     $url = $pwaBaseUrl . $url;
                 // }
             }
+            //need to fetch again to get below attributes, for details api so not very affecting
+            $product = $objectManager->create('Magento\Catalog\Model\Product')->load($product->getId());
+            $extraField = [];
+            $extraField['pre_order'] = $product->getData('pre_order');
+            $extraField['is_salable'] = $product->getData('is_salable');
+            $extraField['color'] = $product->getData('color');
+            $extraField['manufacturer'] = $product->getData('manufacturer');
+            $extraField['gtin14'] = $product->getData('gtin14');
+            $extraField['brand'] = $product->getData('brand');
+            $extraField['model'] = $product->getData('model');
+            $extraField = json_encode($extraField);
         }
 
         return [
-            'url' => $url
+            'url' => $url,
+            'extraData' => $extraField
         ];
     }
 }

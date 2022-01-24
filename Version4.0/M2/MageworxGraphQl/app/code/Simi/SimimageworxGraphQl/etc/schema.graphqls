@@ -22,4 +22,5 @@ type CategoryTree {
 
 type MageworxCanonicalUrl {
   url: String @doc(description: "Url")
+  extraData: String @doc(description: "Extra Data")
 }

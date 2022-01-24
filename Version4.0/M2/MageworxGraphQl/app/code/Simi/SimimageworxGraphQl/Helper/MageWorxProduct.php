@@ -13,6 +13,9 @@ use Magento\Store\Model\ScopeInterface;
  */
 class MageWorxProduct extends \Magento\Framework\App\Helper\AbstractHelper
 {
+
+    const XML_PATH_COMMON_TWITTER_USERNAME = 'mageworx_seo/markup/common/tw_username';
+    
     /**@#+
      * XML config setting paths
      */
@@ -736,5 +739,14 @@ class MageWorxProduct extends \Magento\Framework\App\Helper\AbstractHelper
         }
 
         return $ret;
+    }
+
+    public function getCommonTwUsername($storeId = null): string
+    {
+        return (string)$this->scopeConfig->getValue(
+            self::XML_PATH_COMMON_TWITTER_USERNAME,
+            ScopeInterface::SCOPE_STORE,
+            $storeId
+        );
     }
 }
