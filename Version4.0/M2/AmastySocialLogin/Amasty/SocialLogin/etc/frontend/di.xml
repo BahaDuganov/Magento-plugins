@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Amasty\InvisibleCaptcha\Model\Captcha">
+        <plugin name="Amasty_SocialLogin::InvisibleCaptcha" type="Amasty\SocialLogin\Plugin\InvisibleCaptcha" />
+    </type>
+
+    <type name="Magento\Customer\Block\Form\Register">
+        <plugin name="Amasty_SocialLogin::SetRegisterData" type="Amasty\SocialLogin\Plugin\Customer\Block\Form\RegisterPlugin" />
+    </type>
+
+    <type name="Magento\Customer\Controller\Account\CreatePost">
+        <plugin name="Amasty_SocialLogin::AddSocialFlag" type="Amasty\SocialLogin\Plugin\Customer\Controller\Account\CreatePostPlugin" />
+    </type>
+
+    <type name="Amasty\AdvancedReview\ViewModel\Reviews\Product\View\ListView\WriteReviewButton">
+        <plugin
+            name="Amasty_SocialLogin::allow-render-social-login-button"
+            type="Amasty\SocialLogin\Plugin\AdvancedReview\ViewModel\Reviews\Product\View\ListView\WriteReviewButton\AllowWriteReviewButton"
+        />
+    </type>
+
+    <type name="Magento\Checkout\Block\Onepage">
+        <arguments>
+            <argument name="layoutProcessors" xsi:type="array">
+                <item name="amastySocialLogin" xsi:type="object">Amasty\SocialLogin\Block\LayoutProcessor</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

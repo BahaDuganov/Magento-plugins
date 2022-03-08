@@ -1,0 +1,39 @@
+type Query {
+    amSocialLoginAccountData: [AmLinkedSocialAccounts] @resolver(class:"Amasty\\SocialLoginGraphQl\\Model\\Resolver\\LinkedAccounts")
+    @doc(description: "List of linked accounts"),
+    amSocialLoginButtonConfig: [AmSocialLoginButton] @resolver(class:"Amasty\\SocialLoginGraphQl\\Model\\Resolver\\SocialButtons")
+        @doc(description: "Button configuration")
+}
+
+type Mutation {
+    amSocialLoginLinkAccount(type: String! @doc(description: "Social network type")): AmUnlinkData
+    @resolver(class: "Amasty\\SocialLoginGraphQl\\Model\\Resolver\\Link") @doc(description: "Link account"),
+    amSocialLoginUnlinkAccount(type: String! @doc(description: "Social network type")): AmUnlinkData
+    @resolver(class: "Amasty\\SocialLoginGraphQl\\Model\\Resolver\\Unlink") @doc(description: "Unlink account")
+}
+
+type AmSocialLoginButton {
+    type: String @doc(description: "Social Platform Type")
+    label: String @doc(description: "Label")
+    url: String @doc(description: "Social Url")
+}
+
+type AmLinkedSocialAccounts {
+    type: String @doc(description: "Social platform type")
+    name: String @doc(description: "Customer Name")
+}
+
+type AmUnlinkData {
+    isSuccess: Boolean @doc(description: "Is unlink successful."),
+    message: String @doc(description: "Result message."),
+}
+
+type StoreConfig @doc(description: "The type contains information about a store config.") {
+    amsociallogin_general_enabled: Boolean @doc(description: "Enable Social Login."),
+    amsociallogin_general_login_position: String @doc(description: "Add Social Login to."),
+    amsociallogin_general_button_shape: Int @doc(description: "Login Buttons Shape."),
+    amsociallogin_general_popup_enabled: Boolean @doc(description: "Enable Ajax Popup."),
+    amsociallogin_general_button_position: String @doc(description: "Login Buttons Position."),
+    amsociallogin_general_redirect_type: Int @doc(description: "Redirect after Login."),
+    amsociallogin_general_custom_url: String @doc(description: "Redirect Url after Login."),
+}
