@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <type name="Magento\StoreGraphQl\Model\Resolver\Store\StoreConfigDataProvider">
+        <arguments>
+            <argument name="extendedConfigData" xsi:type="array">
+                <item name="amsociallogin_general_use_new_url" xsi:type="string">amsociallogin/general/use_new_url</item>
+                <item name="amsociallogin_general_enabled" xsi:type="string">amsociallogin/general/enabled</item>
+                <item name="amsociallogin_general_login_position" xsi:type="string">amsociallogin/general/login_position</item>
+                <item name="amsociallogin_general_button_shape" xsi:type="string">amsociallogin/general/button_shape</item>
+                <item name="amsociallogin_general_popup_enabled" xsi:type="string">amsociallogin/general/popup_enabled</item>
+                <item name="amsociallogin_general_button_position" xsi:type="string">amsociallogin/general/button_position</item>
+                <item name="amsociallogin_general_redirect_type" xsi:type="string">amsociallogin/general/redirect_type</item>
+                <item name="amsociallogin_general_custom_url" xsi:type="string">amsociallogin/general/custom_url</item>
+                <item name="amsociallogin_general_redirect_url" xsi:type="string">amsociallogin/general/redirect_url</item>
+            </argument>
+        </arguments>
+    </type>
+</config>
