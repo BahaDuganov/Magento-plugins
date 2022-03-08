@@ -1,0 +1,27 @@
+
+#Custom Module
+type Query
+{
+    MyFatoorahConfig: FatoorahConfigOutput @resolver(class: "Simi\\MyFatoorahGraphql\\Model\\Resolver\\MyFatoorahConfig")
+}
+type Mutation {
+    MyFatoorahCheckout (
+        cartId: String!
+        addressArray: addressArrayInput
+        gateway: String!
+    ): [MyFatoorahCheckoutOutput] @resolver(class: "Simi\\MyFatoorahGraphql\\Model\\Resolver\\MyFatoorahCheckout")
+}
+
+input addressArrayInput {
+    telephone: String
+    city: String
+    region: String
+    postcode: String
+}
+
+type FatoorahConfigOutput {
+    completeUrl: String
+}
+type MyFatoorahCheckoutOutput {
+    urlRedirect: String
+}
