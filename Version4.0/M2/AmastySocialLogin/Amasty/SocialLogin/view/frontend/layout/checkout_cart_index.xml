@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <container name="checkout.cart.am-social-login" htmlTag="div" htmlClass="amsl-cart-page" after="-">
+                <block class="Amasty\SocialLogin\Block\Social" name="amsociallogin-social-checkout_cart"
+                       template="Amasty_SocialLogin::social.phtml">
+                    <arguments>
+                        <argument name="cache_lifetime" xsi:type="number">86400</argument>
+                        <argument name="is_login_sensitive" xsi:type="boolean">true</argument>
+                        <argument name="position"
+                                  xsi:type="const">Amasty\SocialLogin\Model\Source\LoginPosition::CHECKOUT_CART
+                        </argument>
+                    </arguments>
+                </block>
+            </container>
+        </referenceContainer>
+    </body>
+</page>

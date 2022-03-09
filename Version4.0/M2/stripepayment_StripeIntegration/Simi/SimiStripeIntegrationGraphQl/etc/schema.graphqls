@@ -1,0 +1,19 @@
+type Query {
+    simistripesavedcards: [StripeCard]
+    @resolver(class: "\\Simi\\SimiStripeIntegrationGraphQl\\Model\\Resolver\\SimiStripeSavedCards") @doc(description: "Get saved cards")
+}
+
+type StripeCard {
+	id : String
+	brand : String
+	exp_month : String
+	exp_year : String
+	last4 : String
+	three_d_secure_usage : String
+}
+
+input PaymentMethodInput {
+    simi_stripe_integration_cc_stripejs_token : String
+    simi_stripe_integration_cc_saved : String
+    simi_stripe_integration_cc_save : Boolean
+}

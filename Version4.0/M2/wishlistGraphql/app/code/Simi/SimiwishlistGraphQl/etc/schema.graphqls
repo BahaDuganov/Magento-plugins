@@ -1,0 +1,23 @@
+type Query {
+    guestwishlist (
+        sharing_code: String @doc(description: "Performs a full-text search using the specified key words."),
+    ): SharedWishlistData
+    @resolver(class: "Simi\\SimiwishlistGraphQl\\Model\\Resolver\\Guestwishlist") @doc(description: "Wishlist for not logged in Users")
+}
+
+type Mutation {
+    sharewishlist(
+        emails: String! @doc(description: "Email addresses, separated by commas")
+        message: String @doc(description: "Message to sent")
+    ): SharingResult @resolver(class: "\\Simi\\SimiwishlistGraphQl\\Model\\Resolver\\Sharewishlist") @doc(description: "Mutation to share wishlist.")
+}
+
+type SharingResult @doc(description: "The Products object is the top-level object returned in a product search") {
+    status: Boolean! @doc(description: "Success or not")
+    message: String @doc(description: "Message if neccessary")
+}
+
+type SharedWishlistData {
+    wishlist_data : Wishlist
+    user_name : String
+}

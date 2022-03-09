@@ -1,0 +1,26 @@
+type StoreConfig {
+	mageworx_seo: String @doc(description: "MageWorx Seo store configs") @resolver(class: "Simi\\SimimageworxGraphQl\\Model\\Resolver\\MageWorxConfig")
+}
+
+interface ProductInterface {
+	mageworx_canonical_url: MageworxCanonicalUrl @doc(description: "Mageworx canonical url") @resolver(class: "Simi\\SimimageworxGraphQl\\Model\\Resolver\\MageworxProductCanonical")
+    product_seo_name: String @doc(description: "Mageworx product seo name - xtemplates.")
+}
+
+interface ProductInterface {
+	mageworx_canonical_url: MageworxCanonicalUrl @doc(description: "Mageworx canonical url") @resolver(class: "Simi\\SimimageworxGraphQl\\Model\\Resolver\\MageworxProductCanonical")
+    product_seo_name: String @doc(description: "Mageworx product seo name - xtemplates.")
+}
+
+type CmsPage {
+    mageworx_canonical_url: MageworxCanonicalUrl @resolver(class: "Simi\\SimimageworxGraphQl\\Model\\Resolver\\MageWorxCmsPage") @doc(description: "Mageworx canonical url")
+}
+
+type CategoryTree {
+    mageworx_canonical_url: MageworxCanonicalUrl @resolver(class: "Simi\\SimimageworxGraphQl\\Model\\Resolver\\MageWorxCategoryPage") @doc(description: "Mageworx Category url")
+}
+
+type MageworxCanonicalUrl {
+  url: String @doc(description: "Url")
+  extraData: String @doc(description: "Extra Data")
+}

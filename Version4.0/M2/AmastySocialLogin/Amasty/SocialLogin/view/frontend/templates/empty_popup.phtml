@@ -1,0 +1,21 @@
+<?php
+/** @var \Magento\Framework\View\Element\Template $block */
+/** @var \Magento\Framework\Escaper $escaper */
+?>
+
+<div class="amsl-popup-overlay" data-am-js="am-login-overlay" style="display: none">
+    <div id="social-login-popup"
+         class="amsl-popup-block"
+         role="dialog"
+         aria-labelledby="amsl-popup-dialog"
+         tabindex="-1"
+         data-am-js="am-login-popup">
+        <button class="amsl-button amsl-close -clear"
+                title="<?= /* @noEscape */ __('Close') ?>"
+                aria-label="<?= /* @noEscape */ __('Close') ?>"></button>
+        <h2 id="amsl-popup-dialog" class="amsl-dialog-title">
+            <?= /* @noEscape */ __('Login and Registration Form') ?>
+        </h2>
+        <div class="amsl-content-wrapper" data-am-js="am-content-wrapper"></div>
+    </div>
+</div>

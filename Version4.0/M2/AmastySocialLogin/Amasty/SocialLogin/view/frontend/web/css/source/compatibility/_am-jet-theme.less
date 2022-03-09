@@ -1,0 +1,38 @@
+//
+//  Compatibility with Amasty Jet Theme
+//  ____________________________________
+
+//
+//  Common
+//  ------------------------------------
+
+& when (@media-common = true) {
+    .amasty-jet-theme.amsl-popup-observed .ui-widget.ui-datepicker {
+        z-index: 99999 !important;
+    }
+
+    .amsl-popup-block .form .fields.-am-block {
+        display: block;
+    }
+
+    .amsl-form .fieldset .fields .field.choice.-assistance {
+        margin-top: 10px;
+    }
+
+    .amsl-register-content .field.newsletter .label {
+        color: #000;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .amsl-form {
+        .field.choice.-assistance {
+            margin-top: 10px;
+        }
+
+        .form-create-account .fieldset .field.date.field-dob.required {
+            margin-top: 125px;
+            padding-bottom: 5px;
+        }
+    }
+}

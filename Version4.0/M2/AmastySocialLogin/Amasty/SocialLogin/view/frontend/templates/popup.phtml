@@ -1,0 +1,96 @@
+<?php
+/** @var \Amasty\SocialLogin\Block\Popup $block */
+/** @var \Magento\Framework\Escaper $escaper */
+?>
+
+<?php if ($block->isPopupEnabled()): ?>
+    <div class="amsl-popup-overlay" data-am-js="am-login-overlay" style="display: none">
+        <div id="social-login-popup"
+             class="amsl-popup-block -social-<?= /* @noEscape */ $escaper->escapeHtml($block->getPositionTitle()) ?>"
+             data-mage-init='{"tabs":{"openedState":"active"}}'
+             role="dialog"
+             aria-labelledby="amsl-popup-dialog"
+             tabindex="-1"
+             data-am-js="am-login-popup">
+            <button class="amsl-button amsl-close -clear"
+                    title="<?= /* @noEscape */ __('Close') ?>"
+                    aria-label="<?= /* @noEscape */ __('Close') ?>"></button>
+            <h2 id="amsl-popup-dialog" class="amsl-dialog-title">
+                <?= /* @noEscape */ __('Login and Registration Form') ?>
+            </h2>
+            <div class="amsl-content-wrapper" data-am-js="am-content-wrapper"></div>
+            <div class="amsl-tabs-wrapper" data-am-js="am-tabs-wrapper">
+                <ul class="amsl-tablist">
+                    <li data-role="collapsible" class="amsl-title" data-am-js="am-popup-original">
+                        <a href="#amsl-login-content"
+                           class="amsl-link"
+                           data-toggle="switch"
+                           tabindex="-1"><?= $escaper->escapeHtml(__('Login')) ?></a>
+                    </li>
+                    <li data-role="collapsible" class="amsl-title" data-am-js="am-popup-original">
+                        <a href="#amsl-register-content"
+                           class="amsl-link"
+                           data-toggle="switch"
+                           tabindex="-1"><?= $escaper->escapeHtml(__('Register')) ?></a>
+                    </li>
+                </ul>
+                <div id="amsl-login-content" class="amsl-content amsl-login-content" data-role="content">
+                    <p class="amsl-error" data-am-js="error-block"></p>
+                    <div class="amsl-form">
+                        <?= $block->getChildHtmlAndReplaceIds('customer_form_login_popup'); ?>
+                    </div>
+                    <?php if ($block->isSocialsEnabled()): ?>
+                        <?= $block->getChildHtml('amsociallogin-social-popup'); ?>
+                    <?php endif; ?>
+                </div>
+                <div id="amsl-register-content" class="amsl-content amsl-register-content" data-role="content">
+                    <p class="amsl-error" data-am-js="error-block"></p>
+                    <div class="amsl-form">
+                        <?= $block->getChildHtmlAndReplaceIds('customer_form_register_popup'); ?>
+                    </div>
+                    <?php if ($block->isSocialsEnabled()): ?>
+                        <?= $block->getChildHtml('amsociallogin-social-popup'); ?>
+                    <?php endif; ?>
+                </div>
+            </div>
+            <div class="amsl-tabs-wrapper -forgot" data-am-js="am-tabs-wrapper-forgot">
+                <ul class="amsl-tablist">
+                    <li class="amsl-title active">
+                        <a href="#amsl-forgot-content" class="amsl-link">
+                            <?= $escaper->escapeHtml(__('Forgot Your Password?')) ?>
+                        </a>
+                    </li>
+                </ul>
+                <div id="amsl-forgot-content" class="amsl-content amsl-forgot-content">
+                    <p class="amsl-error" data-am-js="error-block"></p>
+                    <div class="amsl-form">
+                        <?= $block->getChildHtml('amsociallogin_forgotPassword'); ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/x-magento-init">
+        {
+            <?php if ($block->isShowPasswordAvailable()): ?>
+            "*": {
+                "Magento_Ui/js/core/app": {
+                    "components": {
+                        "customer_form_login_popup_showPassword": {
+                            "component": "Amasty_SocialLogin/js/amsl-show-password",
+                            "passwordSelector": "#pass"
+                        },
+                        "customer_form_register_popup_showPassword": {
+                            "component": "Amasty_SocialLogin/js/amsl-show-password",
+                            "passwordSelector": "#password,#password-confirmation"
+                        }
+                    }
+                }
+            },
+            <?php endif; ?>
+            "[data-am-js='am-login-popup']": {
+                "Amasty_SocialLogin/js/am-popup": <?= /* @noEscape */ $block->getJsonConfig(); ?>
+            }
+        }
+        </script>
+    </div>
+<?php endif; ?>

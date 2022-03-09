@@ -7,3 +7,12 @@ type SimiStripeConfig {
     stripe_public_key : String
     stripe_3d_secure : String
 }
+
+input PaymentMethodInput {
+    simi_stripe_cc_token : String
+    simi_stripe_cc_exp_month : String
+    simi_stripe_cc_last4 : String
+    simi_stripe_cc_type : String
+    simi_stripe_three_d_src : String
+    simi_stripe_three_d_client_secret: String
+}
