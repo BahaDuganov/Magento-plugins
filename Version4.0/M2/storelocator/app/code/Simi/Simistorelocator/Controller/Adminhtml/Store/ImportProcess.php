@@ -4,9 +4,11 @@ namespace Simi\Simistorelocator\Controller\Adminhtml\Store;
 
 use Simi\Simistorelocator\Controller\Adminhtml\Store;
 
-class ImportProcess extends Store {
+class ImportProcess extends Store
+{
 
-    public function execute() {
+    public function execute()
+    {
         $resultRedirect = $this->resultRedirectFactory->create();
 
         if (isset($_FILES['filecsv'])) {
@@ -15,19 +17,19 @@ class ImportProcess extends Store {
                 return $resultRedirect->setPath('*/*/importstore');
             }
 
-            $fileName = $_FILES['filecsv']['tmp_name'];
-            $csvObject = $this->_objectManager->create('Magento\Framework\File\Csv');
+            $fileName     = $_FILES['filecsv']['tmp_name'];
+            $csvObject    = $this->_objectManager->create('Magento\Framework\File\Csv');
             $helperRegion = $this->_objectManager->create('Simi\Simistorelocator\Helper\Region');
-            $data = $csvObject->getData($fileName);
+            $data         = $csvObject->getData($fileName);
 
             $store = $this->_createMainModel();
 
             $storeData = array();
 
             try {
-                $total = 0;
+                $total         = 0;
                 $error_message = '';
-                $flag = 1;
+                $flag          = 1;
                 foreach ($data as $col => $row) {
                     if ($col == 0) {
                         $index_row = $row;
@@ -38,30 +40,20 @@ class ImportProcess extends Store {
                         }
 
                         if (isset($storeData['country_id']) && isset($storeData['state']))
-                            $storeData['state_id'] = $helperRegion->validateState(
-                                    $storeData['country_id'],
-                                    $storeData['state']
-                                );
+                            $storeData['state_id'] = $helperRegion->validateState($storeData['country_id'], $storeData['state']);
 
-                        if (isset($storeData['state_id']) 
-                                && $storeData['state_id'] == \Simi\Simistorelocator\Helper\Region::STATE_ERROR) {
-                            $_state = $storeData['state_id'] == ''
-                                    || $storeData['state_id'] == -1? 'null'
-                                    : $storeData['state_id'];
-                            $error_message .= ' <br />' . $flag . ': ' . $_state
-                                    . ' of <strong>' . $storeData['store_name']
-                                    . '</strong>';
+                        if (isset($storeData['state_id']) && $storeData['state_id'] == \Simi\Simistorelocator\Helper\Region::STATE_ERROR) {
+                            $_state = $storeData['state_id'] == '' || $storeData['state_id'] == -1 ? 'null' : $storeData['state_id'];
+                            $error_message .= ' <br />' . $flag . ': ' . $_state . ' of <strong>' . $storeData['store_name'] . '</strong>';
                             $flag++;
                         }
 
                         if (isset($storeData['state_id']))
                             $_state_id = $storeData['state_id'] > \Simi\Simistorelocator\Helper\Region::STATE_ERROR;
 
-                        if (isset($storeData['store_name']) && $storeData['store_name'] &&
-                                isset($storeData['address']) && $storeData['address'] &&
-                                isset($storeData['country_id']) && $storeData['country_id'] && isset($_state_id) && $_state_id) {
-                            $storeData['meta_title'] = $storeData['store_name'];
-                            $storeData['meta_keywords'] = $storeData['store_name'];
+                        if (isset($storeData['store_name']) && $storeData['store_name'] && isset($storeData['address']) && $storeData['address'] && isset($storeData['country_id']) && $storeData['country_id'] && isset($_state_id) && $_state_id) {
+                            $storeData['meta_title']       = $storeData['store_name'];
+                            $storeData['meta_keywords']    = $storeData['store_name'];
                             $storeData['meta_description'] = $storeData['store_name'];
                             $store->setData($storeData);
                             $store->setId(null);
@@ -85,14 +77,16 @@ class ImportProcess extends Store {
                 }
 
                 return $resultRedirect->setPath('*/*/index');
-            } catch (\Exception $e) {
+            }
+            catch (\Exception $e) {
                 $this->messageManager->addError($e->getMessage());
                 return $resultRedirect->setPath('*/*/importstore');
             }
         }
     }
 
-    protected function _isAllowed() {
+    protected function _isAllowed()
+    {
         return $this->_authorization->isAllowed('Simi_Simistorelocator::storelocator');
     }
 

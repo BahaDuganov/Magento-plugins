@@ -5,7 +5,7 @@
         <block class="Magento\Backend\Block\Widget\Grid\Container" name="simistorelocatoradmin_holiday.grid.container" template="Magento_Backend::widget/grid/container/empty.phtml"/>
         <block class="Magento\Backend\Block\Widget\Grid\Serializer" name="crosssell_grid_serializer">
             <arguments>
-                <argument name="grid_block" xsi:type="string">storelocatoradmin.holiday.grid</argument>
+                <argument name="grid_block" xsi:type="string">simistorelocatoradmin.holiday.grid</argument>
                 <argument name="callback" xsi:type="string">getSelectedRows</argument>
                 <argument name="input_element_name" xsi:type="string">serialized_holidays</argument>
                 <argument name="reload_param_name" xsi:type="string">simistorelocator_holiday</argument>

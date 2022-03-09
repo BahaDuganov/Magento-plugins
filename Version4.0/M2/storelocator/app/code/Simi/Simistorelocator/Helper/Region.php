@@ -5,7 +5,8 @@ namespace Simi\Simistorelocator\Helper;
 use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Framework\App\Helper\Context;
 
-class Region extends AbstractHelper {
+class Region extends AbstractHelper
+{
 
     /**
      * @var \Magento\Directory\Model\ResourceModel\Region\Collection
@@ -17,9 +18,8 @@ class Region extends AbstractHelper {
      * @param Context $context
      * @param \Magento\Directory\Model\ResourceModel\Region\CollectionFactory $regionCollectionFactory
      */
-    public function __construct(
-    Context $context, \Magento\Directory\Model\ResourceModel\Region\CollectionFactory $regionCollectionFactory
-    ) {
+    public function __construct(Context $context, \Magento\Directory\Model\ResourceModel\Region\CollectionFactory $regionCollectionFactory)
+    {
         $this->regionCollectionFactory = $regionCollectionFactory;
         parent::__construct($context);
     }
@@ -34,7 +34,8 @@ class Region extends AbstractHelper {
      * @param $state_name
      * @return int
      */
-    public function validateState($country_id, $state_name) {
+    public function validateState($country_id, $state_name)
+    {
         $collection = $this->regionCollectionFactory->create();
         $collection->addCountryFilter($country_id);
 
@@ -45,7 +46,18 @@ class Region extends AbstractHelper {
         if (sizeof($collection) > 0) {
             $region_id = self::STATE_ERROR;
             foreach ($collection as $region) {
-                if (strcasecmp($state_name, $region->getData('name')) == 0) {
+                if ($region->getData('name')) {
+                    if (strcasecmp($state_name, $region->getData('name')) == 0) {
+                        $region_id = $region->getId();
+                        break;
+                    }
+                } else {
+                    if (strcasecmp($state_name, $region->getData('default_name')) == 0) {
+                        $region_id = $region->getId();
+                        break;
+                    }
+                }
+                if (strcasecmp($state_name, $region->getData('code')) == 0) {
                     $region_id = $region->getId();
                     break;
                 }

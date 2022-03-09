@@ -20,13 +20,20 @@ class Storelocations extends Api
 
     public $simiconnectorHelper;
 
+    /*
+     * @var \Magento\Framework\View\Asset\Repository $assetRepo
+     */
+    public $assetRepo;
+
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $simiObjectManager,
-        \Simi\Simiconnector\Helper\Data $helper
+        \Simi\Simiconnector\Helper\Data $helper,
+        \Magento\Framework\View\Asset\Repository $assetRepo
     )
     {
         parent::__construct($simiObjectManager);
         $this->simiconnectorHelper = $helper;
+        $this->_assetRepo = $assetRepo;
     }
 
     public function setBuilderQuery()
@@ -122,7 +129,11 @@ class Storelocations extends Api
                     ) . $storeReturn['baseimage'];
             } else {
 //           Return default store image as base image if user not config.
-                $storeReturn["image"] = "http://localhost:81/cms/pub/static/version1557471173/adminhtml/Magento/backend/en_US/Simi_Simistorelocator/images/default_store.png";
+                $fileId = 'Simi_Simistorelocator::images/default_store.png';
+                $paramAssets = [
+                    'area' => 'adminhtml'
+                ];
+                $storeReturn["image"] = $this->_assetRepo->getUrlWithParams($fileId, $paramAssets);
             }
             $storeReturn['image_gallery'] = $this->getStoreGallery($item);
             $result['storelocations'][$index] = $storeReturn;
